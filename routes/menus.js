@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Menu = require("../models/menu");
+const Menu = require('../models/menu');
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const menu = new Menu({
-      meal: req.body.meal,
+      category: req.body.category,
       description: req.body.description,
     });
     await menu.save();
@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const menus = await Menu.find();
     res.status(200).send(menus);
@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const menu = await Menu.findById(req.params.id);
     if (!menu) {
@@ -37,7 +37,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Delete a agneda by ID
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const menus = await Menu.findByIdAndDelete(req.params.id);
     if (!menus) {
@@ -46,6 +46,16 @@ router.delete("/:id", async (req, res) => {
     res.status(200).send(menus);
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+router.delete('/dropdb', async (req, res) => {
+  try {
+    const db = mongoose.connection.db;
+    await db.dropDatabase();
+    res.send({ message: 'Database dropped successfully' });
+  } catch (error) {
+    res.status(500).send({ error: 'Error dropping database', details: error });
   }
 });
 
