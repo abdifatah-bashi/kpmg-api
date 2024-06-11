@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Menu = require('../models/menu');
 
-console.log(`🔥:  :`);
 router.post('/', async (req, res) => {
   try {
     const menu = new Menu({
