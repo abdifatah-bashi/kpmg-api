@@ -5,6 +5,7 @@ const usersRouter = require('./routes/users');
 const agendasRouter = require('./routes/agendas');
 const remindresRouter = require('./routes/reminders');
 const birthdaysRouter = require('./routes/birthdays');
+const menusRouter = require('./routes/menus');
 const photosRouter = require('./routes/photos');
 const path = require('path');
 
@@ -25,6 +26,7 @@ app.use('/users', usersRouter);
 app.use('/agendas', agendasRouter);
 app.use('/reminders', remindresRouter);
 app.use('/birthdays', birthdaysRouter);
+app.use('/menus', menusRouter);
 app.use('/photos', photosRouter);
 
 app.delete('/dropdb', async (req, res) => {
