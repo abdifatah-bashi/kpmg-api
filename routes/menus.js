@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Menu = require('../models/menu');
+const upload = require('../middleware/upload');
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   try {
     const menu = new Menu({
       category: req.body.category,
